@@ -126,16 +126,15 @@ end
 
 keyboardCmd = [[{
 "inline_keyboard": [
-[{"text": "م1","callback_data": "List1"},{"text": "م2","callback_data": "List2"},{"text": "م3","callback_data": "List3"}],
+[{"text": "م1","callback_data": "List1"},{"text": "م2","callback_data": "List2"}],
+[{"text": "م3","callback_data": "List3"}],
 [{"text": "الالعاب","callback_data": "CmdSudo"},{"text": "السورس","callback_data": "List4"}],
 [{"text": "","callback_data": "LoginOut"}]
 ]}
 ]]
-
-
 keyboardSitting = [[{"inline_keyboard": [
 [{"text": "- اعدادات المجموعة","callback_data": "GroupSitting"},{"text": "- اعدادات الوسائط","callback_data": "MediaSitting"}],
-[{"text": "- اعدادات اخرى","callback_data": "OtherSetting"},{"text": "","callback_data": "LoginOut"}]
+[{"text": "- اعدادات اخرى","callback_data": "OtherSetting"},{"text": "اخفاء الاعدادات","callback_data": "LoginOut"}]
 ]}
 ]]
 
@@ -359,7 +358,8 @@ list_settings = '{"inline_keyboard": ['
 ..']}'
 msg.KeyboardCmd = list_settings
 textMD = [[
--@NvvvM
+- ⊱「 [S O U R C E](https://t.me/Nvvv2)」
+- ⊱「 [𝐀 𝐋 𝐎 𝐍 𝐄 ♪](https://t.me/C1CIC)」
 ]]
 GetUserID(msg.sender_user_id_,function(arg,data)
 msg = arg.msg
@@ -383,7 +383,7 @@ list_settings = '{"inline_keyboard": ['
 ..']}'
 msg.KeyboardCmd = list_settings
 textMD = [[ 
-  *العاب  لسورس فيدرا ♪ *  ༄
+  *العاب بوت فيدرا 🏌🏻‍♂️*  
 ⇠  لتفعيل الالعاب او تعطيلها ارسل
 ⇠  تفعـيل ⇠ تعطيل ⇠ الالعاب
 ————————————
@@ -404,8 +404,8 @@ textMD = [[
 • محيبس ⇠ لعبه محيبس الشهيره
 • المختلف ⇠ لعبه اختلاف لسمايل
 ———————————
-  ⇠ مجوهراتي ⇠ عشان تشوف عدد مجوهراتك 
-⇠ بيع مجوهراتي + العدد للأستبدال ⇺
+  • مجوهراتي ⇠ عشان تشوف عدد مجوهراتك 
+• بيع مجوهراتي + عدد مجوهراتك للأستبدال 
 
 ༄「 [𝐀 𝐋 𝐎 𝐍 𝐄 ♪](https://t.me/C1CIC)」
 ]] 
@@ -560,6 +560,41 @@ msg.Editeinline = true
 return SendMsgInline(msg)
 end
 
+function UpdateOtherSitting(msg)
+list_settings = '{"inline_keyboard": ['
+..'[{"text": " الايدي » '..(redis:get(boss..'lock_id'..msg.chat_id_) or 'false')..'","callback_data": "Sitting3#lock_id"},'
+..'{"text": " التاك للكل » '..(redis:get(boss..'lock_takkl'..msg.chat_id_) or 'false')..'","callback_data": "Sitting3#lock_takkl"}],'
+
+..'[{"text": " الترحيب » '..(redis:get(boss..'welcome:get'..msg.chat_id_) or 'false')..'","callback_data": "Sitting3#welcome:get"},'
+..'{"text": " الردود » '..(redis:get(boss..'replay'..msg.chat_id_) or 'false')..'","callback_data": "Sitting3#replay"}],'
+
+..'[{"text": " الردود العشوائيه » '..(redis:get(boss..'lock_tag'..msg.chat_id_) or 'false')..'","callback_data": "Sitting3#lock_tag"},'
+..'{"text": " التحذير » '..(redis:get(boss..'lock_woring'..msg.chat_id_) or 'false')..'","callback_data": "Sitting3#lock_woring"}],'
+
+..'[{"text": " تاك » '..(redis:get(boss..'lock_RandomRdod'..msg.chat_id_) or 'false')..'","callback_data": "Sitting3#lock_RandomRdod"},'
+..'{"text": " الرابط » '..(redis:get(boss..'lock_linkk'..msg.chat_id_) or 'false')..'","callback_data": "Sitting3#lock_linkk"}],'
+
+..'[{"text": " المغادره » '..(redis:get(boss..'lock_leftgroup'..msg.chat_id_) or 'false')..'","callback_data": "Sitting3#lock_leftgroup"},'
+..'{"text": " الحظر » '..(redis:get(boss..'lock_KickBan'..msg.chat_id_) or 'false')..'","callback_data": "Sitting3#lock_KickBan"}],'
+
+..'[{"text": " الحمايه » '..(redis:get(boss..'antiedit'..msg.chat_id_) or 'false')..'","callback_data": "Sitting3#antiedit"},'
+..'{"text": " الايدي بالصوره » '..(redis:get(boss..'idphoto'..msg.chat_id_) or 'false')..'","callback_data": "Sitting3#idphoto"}],'
+
+..'[{"text": " التحقق » '..(redis:get(boss..'lock_check'..msg.chat_id_) or 'false')..'","callback_data": "Sitting3#lock_check"},'
+..'{"text": " التنظيف التلقائي » '..(redis:get(boss..'lock_cleaner'..msg.chat_id_) or 'false')..'","callback_data": "Sitting3#lock_cleaner"}],'
+
+..'[{"text": "- رجوع »","callback_data": "CmdBack1"},{"text": "- اخفاء الامر","callback_data": "LoginOut"}]'
+
+
+..']}'
+
+list_settings = list_settings:gsub('true', '{✔️}')
+list_settings = list_settings:gsub('false', '{✖️}')
+msg.textmsg = "- اهلا بك في لستة الاوامر .\n- الان يمكنك تفعيل وتعطيل الاعدادات ."
+msg.KeyboardCmd = list_settings
+msg.Editeinline = true
+return SendMsgInline(msg)
+end
 
 function RandomText() 
 local Cominnt = { 
