@@ -1,2 +1,2 @@
-# ee6ee
-https://github.com/hidarr/ee6ee.git
+
+https://T.me/C1CIC
